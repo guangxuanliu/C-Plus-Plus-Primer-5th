@@ -129,3 +129,63 @@ int main()
  }
 return 0;
 }
+
+练习1.12:下面的for循环完成了什么功能？sum的终值是多少？
+ int sum = 0;
+ for(int i = -100;i <= 100;++i)
+  sum += i;
+答：该循环从计算了从-100到100的和。sum的结果是0。
+
+练习1.13:使用for循环重做1.4.1节中的所有练习(第11页)。
+答：将while循环替换为下面的for循环即可。
+ int sum = 0;
+ for(int val = 50;val <= 100;++val)
+  sum += val;
+
+ for(int val = 10;val >= 0;--val)
+  std::cout << val << std::endl;
+
+ for(;val1 <= val2;++val1)
+  std::cout << val1 << std::endl;
+
+练习1.14:对比for循环和while循环，两种形式的优缺点各是什么？
+答：在for循环中，循环控制变量的初始化和修改都放在语句头部分，形式较简洁，且特别适用于循环次数已知的情况。
+在while循环中，循环控制变量的初始化一般放在while语句之前，循环控制变量的修改一般放在循环体中，形式上不如for语句简洁，但它比较适用于循环次数不易预知的情况（用某一条件控制循环）。
+两种形式各有优点，但它们在功能上是等价的，可以相互转换。
+
+练习1.15:编写程序，包含第14页“再探编译”中讨论的常见错误，熟悉编译器生成的错误信息。
+答：编译器不同，错误信息不同，根据自己所用的编译器看一下错误信息。
+
+练习1.16:编写程序，从cin读取一组数，输出其和。
+答：
+/*
+ *输入数据后输入文件结束符结束输入
+ *Windows系统中为Ctrl+Z
+ *Unix系统中为Ctrl+D
+ */
+#include<iostream>
+int main()
+{
+ int sum = 0,val = 0;
+ std::cout << "Please enter a serial of numbers:" << std::endl;
+ while(std::cin >> val)
+  sum += val;
+ std::cout << std:: endl << "Sum is: " << sum << std::endl;
+ return 0; 
+}
+
+/*
+ *该程序不用输入文件结束符
+ *输入结束后按回车即可
+ */
+#include<iostream>
+int main()
+{
+ int sum = 0,val = 0;
+ std::cout << "Please enter a serial of numbers:" << std::endl;
+ while(std::cin >> val && std::cin.get() != '\n')
+  sum += val;
+ std::cout << "Sum is: " << sum << std::endl;
+ return 0; 
+}
+
