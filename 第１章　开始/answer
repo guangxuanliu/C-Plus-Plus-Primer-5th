@@ -237,3 +237,42 @@ int main()
  std::cout << item_sum << std::endl;
  return 0;
 }
+
+练习1.23:编写程序，读取多条销售记录，并统计每个ISBN(每本书)有几条销售记录。
+
+#include<iostream>
+#include"Sales_item.h"
+int main()
+{
+ Sales_item item_curr,item_val;
+ int cnt = 0;
+ if(std::cin >> item_curr)
+  {
+   cnt += 1;
+   while(std::cin >> item_val)
+    {
+     if(item_curr.isbn() == item_val.isbn())
+      {
+       ++cnt;
+      }
+     else
+      {
+       std::cout << item_curr.isbn() << " had " << cnt
+                 << " records " << std::endl;
+       item_curr = item_val;
+       cnt = 1;
+      }
+    }
+   std::cout << item_curr.isbn() << " had " << cnt
+           << " records " << std::endl;
+  }
+ else
+  std::cerr << "No data!" << std::endl;
+ return 0;
+}
+
+练习1.24:输入表示多个ISBN的多条销售记录来测试上一个程序，每个ISBN的记录应该聚在一起。
+答：输入多条测试即可。
+
+练习1.25:借助网站上的Sales_item.h头文件，编译并运行本节给出的书店程序。
+答：略。
