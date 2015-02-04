@@ -1,0 +1,27 @@
+练习2.1:类型int、long、long long和short的区别是什么？无符号类型和带符号类型的区别是什么？float和double的区别是什么？
+答：在我的编译环境中，int占4字节，long占8字节，long long占8字节。无符号和带符号所表示的范围不同，如signed char理论上可以表示-127到127，unnsigned char表示0到256。float占4个字节，double占8个字节，切double比float精度高，一般应使用double。
+
+练习2.2:计算按揭贷款时，对于利率、本金和付款分别应选择何种数据类型？说明你的理由。
+答：缺少这方面的社会经验，结合实际情况选择。
+
+练习2.3:读程序写结果。
+unsigned u = 10,u2 = 42;
+std::cout << u2 - u << std::endl;
+std::cout << u - u2 << std::endl;
+
+int i = 10,i2 = 42;
+std::cout << i2 - i << std::endl;
+std::cout << i - i2 << std::endl;
+std::cout << i - u << std::endl;
+std::cout << u - i << std::endl;
+
+结果依次是：
+32
+4294967264
+32
+-32
+0
+0
+
+练习2.4:编写程序检查你的估计是否正确，如果不正确，请仔细研读本节直到弄明白问题所在。
+答：见上一题。
