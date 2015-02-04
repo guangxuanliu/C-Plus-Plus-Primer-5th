@@ -58,3 +58,52 @@ int month = 09, day = 07;
 答：
 (1)cout << 2 << '\115' << '\n';
 (2)cout << 2 << '\t' << '\115' << '\n';
+
+练习2.9:解释下列定义的含义。对于非法的定义，请说明错再何处并将其改正。
+(a) std::cin >> int input_value;
+(b) int i = {3.14};
+(c) double salary = wage = 9999.99;
+(d) int i = 3.14;
+答：
+(a)非法，此处不能声明变量，应该先定义再使用。
+(b)合法，但是会有警告信息。(按作者的意思应该是不合法，作者在书中用了‘错误’两个字)
+warning: narrowing conversion of ‘3.1400000000000001e+0’ from ‘double’ to ‘int’ inside { } [-Wnarrowing]
+  int i = {3.14};
+               ^
+(c)不合法，wage没有定义，应先定义wage再使用。
+(d)合法，不给出警告，但是信息会丢失。
+
+练习2.10:下列变量的初值分别是什么？
+std::string global_str;
+int global_int;
+int main()
+{
+  int local_int;
+  std::string local_str;
+}
+答：global_str和local_str的初始值为空串，global_int和local_int的初始值为0 。(按作者的意思，global_str和local_str的初始化方式由std::string决定，即初始化为空串，global_int定义在函数外，被默认初始化为0，local_int定义在函数内，其值是未定义的)
+。
+
+练习2.11:指出下面的语句是声明还是定义：
+(a)extern int ix = 1024;
+(b)int iy;
+(c)extern int iz;
+答：
+(a)定义，如果在函数体内部的话会报错。
+(b)声明并定义。
+(c)声明。
+
+练习2.12:请指出下面的名字中哪些是非法的？
+(a) int double = 3.14
+(b) int _;
+(c) int catch-22;
+(d) int 1_or_2 = 1;
+(e) double Double = 3.14;
+答：
+(a)非法，使用了关键字。
+(b)合法。
+(c)非法，标识符由字母、数字、下划线组成。
+(d)非法，标识符不应该以数字开头。
+(e)合法。
+
+
