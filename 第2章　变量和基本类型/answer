@@ -328,5 +328,61 @@ auto j = i; const auto &k = i; auto *p = &i;
 const auto j2 = i, &k2 = i;
 答：j为int；k为const int&；p为const int*；j2为const int；k2为const int&。
 
+练习2.26:关于下面的代码，请指出每个变量的类型以及程序结束时他们的值。
+int a = 3, b = 4;
+decltype(a) c = a;
+decltype((b)) d = a;
+++c;
+++d;
+答：
+a是int型，值为4 。
+b是int型，值为4 。
+c是int型，值为4 。
+d是int&，值为4 。
+
+练习2.37:赋值是会产生引用的一类典型表达式，引用的类型就是左值的类型。也就是说，如果i是int，则表达式i = x的类型是int& 。根据这一特点，请指出下面代码中每一个变量的类型和值。
+int a = 3, b = 4;
+decltype(a) c = a;
+decltype(a = b) d = a;
+答：
+a是int型，值为3 。
+b是int型，值为4 。
+c是int型，值为3 。
+d是int& ，值为3 。
+
+练习2.38:说明由decltype指定类型和由auto指定类型有何区别。请举出一个例子，decltype指定的类型与auto指定的类型一样；再聚一个例子，decltype指定的类型与auto指定的类型不一样。
+答：
+auto：当初始值为引用时，编译器会以引用对象的类型作为auto的类型；一般会忽略掉顶层const。
+decltype：如果使用的表达式是一个变量，则decltype返回该变量的类型(包括顶层const和引用在内)；如果使用的表达式不是一个变量，返回表达式结果对应类型。
+
+decltype(f()) sum1 = f();
+auto sum2 = f();
+
+const int i = 20;
+const int &ri = i;
+decltype(ri) dri1 = i;
+auto dri2 = ri;
+
+练习2.39:编译下面的程序观察其运行结果，注意，如果忘记写类定义体后面的分号会发生什么情况？记录下相关信息，以后可能会有用。
+struct Foo { /* 此处为空 */ } //注意：没有分号
+int main()
+{
+ return 0;
+}
+答：
+error: expected ‘;’ after struct definition
+ struct Foo {}
+             ^
+练习2.40:根据自己的理解写出Sales_data类，最好与书中的例子有所区别。
+答：按书中的来就行，以防后面再出Sales_data类的问题代码不统一。
+struct Sales_data 
+{
+ std::string bookNo;
+ unsigned units_sole = 0;
+ double revenue = 0.0;
+}
+
+练习2.41:使用你自己的Sales_data类重写1.5.1节(第20页)、1.5.2节(第21页)和1.6节(第22页)的练习。眼下先把Sales_data类的定义和main函数放在一个文件里。
+答：Sales_data类的定义可以参考书中的代码。
 
 
