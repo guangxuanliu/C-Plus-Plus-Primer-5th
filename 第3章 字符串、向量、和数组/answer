@@ -1,0 +1,78 @@
+练习3.1:使用恰当的using声明重做1.4.1节(第11页)和2.6.2节(第67页)的练习。
+答：把cin和cout替换一下就行。
+
+练习3.2:编写一段程序从标准输入中一次读取一整行，然后修改该程序使其一次读入一个词。
+答：
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+ string line;
+ while(getline(cin,line))
+  cout << line << endl;
+ //string word;
+ //while(cin >> word)
+ // cout << word << " ";
+ //cout << endl;
+ return 0;
+}
+
+练习3.3:请说明string类的输入运算符和getline函数分别是如何处理空白字符的。
+答：
+string类的输入运算符：string对象会自动忽略开头的空白(即空格符、换行符、制表符等)，并从第一个真正的字符开始读起，直到遇见下一个空白为止。
+getline函数：从给定的输入流中读入内容，直到遇到换行符为止(注意换行符也被读进来了)，然后把所读的内容存到那个string对象中去(注意不存换行符)。getline只要一遇到换行符就结束读取操作并返回结果，哪怕输入的一开始就是换行符也是如此。如果输入真的一开始就是换行符，那么所得的结果是个空string。
+
+练习3.4:编写一个程序读入两个字符串，比较其是否相等并输出结果。如果不想等，输出较大的那个字符串。改写上述程序，比较输入的两个字符串是否等长，如果不等长，输出长度较大的那个字符串。
+答：
+
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+ string str1,str2;
+ cout << "Please enter two strings:" << endl;
+ cin >> str1 >> str2;
+ if(str1 == str2)
+  cout << "str1 is equal to str2." << endl;
+ else
+  {
+   cout << "the bigger one is：";
+   if(str1 > str2)
+    cout << str1 << endl;
+   else
+    cout << str2 << endl;
+  }
+
+/*
+*  if(str1.size() == str2.size())
+*   cout << "the two string has the same size." << endl;
+*  else
+*  {
+*   cout << "the longer one is：";
+*   if(str1.size() > str2.size())
+*    cout << str1 << endl;
+*   else
+*    cout << str2 << endl;
+*  }
+*/
+ return 0;
+}
+
+练习3.5:编写一段程序从标准输入中读入多个字符串并将它们连接在一起，输出连接成的大字符串。然后修改上述程序，用空格把输入的多个字符串分隔开来。
+答：
+
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+ string str1, str2;
+ while(cin >> str1)
+//  str2 += str1;
+  str2 += str1 + " ";
+ cout << str2 << endl;
+ return 0;
+}
+
