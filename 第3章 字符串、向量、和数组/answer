@@ -76,4 +76,80 @@ int main()
  return 0;
 }
 
+练习3.6:编写一段程序，使用范围for语句将字符串内得所有字符用X代替。
+答：
+#include<iostream>
+using namespace std;
+int main()
+{
+ string str("some string");
+ for(auto &c : str)
+  if(!isspace(c))
+   c = 'X';
+ cout << str << endl;
+ return 0;
+}
+
+练习3.7:就上一题完成得程序而言，如果将循环控制变量得类型设为char，将会发生什么？先估计一下结果，然后实际编程进行验证。
+答：输出结果还是原字符串“some string”。
+
+练习3.8:分别用while循环和传统得for循环重写第一题得程序，你觉得哪种形式更好呢？为什么？
+答：
+#include<iostream>
+using namespace std;
+int main()
+{
+ string str("some string");
+ decltype(str.size()) index = 0;
+ while(str[index])
+  {
+   if(!isspace(str[index]))
+    str[index] = 'X';
+   ++index;
+  }
+ cout << str << endl;
+ return 0;
+}
+
+#include<iostream>
+using namespace std;
+int main()
+{
+ string str("some string");
+ for(decltype(str.size()) index = 0;
+     index < str.size();++index)
+  if(!isspace(str[index]))
+   str[index] = 'X';
+ cout << str << endl;
+ return 0;
+}
+
+范围for不用考虑字符串得范围，所以更简洁，使用起来更方便。
+
+练习3.9:下面得程序有何作用？它合法吗？如何不合法，为什么？
+string s;
+cout << s[0] << endl;
+答：不合法。s被默认初始化为空字符串，使用下标访问空string会引发不可预知的结果。但是C++标准并不要求标准库检测下标是否合法。在我的编译环境中输出空。
+
+练习3.10:编写一段程序，读入一个包含标点符号的字符串，将标点符号去除后输出字符串剩余的部分。
+答：
+#include<iostream>
+using namespace std;
+int main()
+{
+ string str1,str2;
+ cout << "Please enter a string:" << endl;
+ while(getline(cin,str1))
+  for(auto &c : str1)
+  if(!ispunct(c))
+   str2 += c;
+ cout << str2 << endl;
+ return 0;
+}
+
+练习3.11:下面的范围for语句合法吗？如果合法，c得类型是什么？
+const string s = "Keep out!";
+for(auto &c : s) { /*……*/ }
+答：不合法，如果合法，则可以给c赋值从而改变string的值，但是string是const，所以是非法的。但是我的编译环境并没有报错，也没有给出警告。
+
 
