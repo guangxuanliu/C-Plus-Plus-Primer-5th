@@ -152,4 +152,152 @@ const string s = "Keep out!";
 for(auto &c : s) { /*……*/ }
 答：不合法，如果合法，则可以给c赋值从而改变string的值，但是string是const，所以是非法的。但是我的编译环境并没有报错，也没有给出警告。
 
+练习3.12:下列vector对象的定义有不正确的吗？如果有，请指出来。对于正确的，描述其执行结果;对于不正确的，说明其错误原因。
+(a)vector<vector<int>> ivec;
+(b)vector<string> svec = ivec;
+(c)vector<string> svec(10,"null");
+答：
+(a)正确，定义一个类型为vector<vector<int>>的变量。
+(b)错误，两个vector对象的类型不相同。
+(c)正确，svec有10个值为"null"的元素。
+
+练习3.13:下列的vector对象各包含多少个元素？这些元素的值分别是什么？
+(a)vector<int> v1;
+(b)vector<int> v2(10);
+(c)vector<int> v3(10,42);
+(d)vector<int> v4{10};
+(e)vector<int> v5{10,42};
+(f)vector<string> v6{10};
+(g)vector<string> v7{10,"hi"};
+答：
+(a)0个元素。
+(b)10个元素，每个元素的值都为0。
+(c)10个元素，每个元素的值都为42。
+(d)1个元素，值为10.
+(e)2个元素，每个元素的值都为42.
+(f)10个元素，每个元素的值都为空。
+(g)10个元素，每个元素的值都为"hi"。
+
+练习3.14:编写一段程序，用cin读入一组整数并把它们存入一个vector对象。
+答：
+#include<iostream>
+#include<vector>
+using namespace std;
+int main()
+{
+ vector<int> ivec;
+ int num;
+ while(cin >> num)
+  ivec.push_back(num);
+ return 0;
+}
+
+练习3.15:改写上题的程序，不过这次读入的是字符串。
+答：
+#include<iostream>
+#include<vector>
+#include<string>
+using namespace std;
+int main()
+{
+ vector<string> svec;
+ string str;
+ while(cin >> str)
+  svec.push_back(str);
+ return 0;
+}
+
+练习3.16:编写程序，把练习3.13中vector对象的容量和具体内容输出出来。检查你之前的回答是否正确，如果不对，回头重新学习3.3.1节(第87页)直到弄明白错在何处为止。
+答：
+用v1举例，其他类似。
+cout << v1.size() << endl;
+for(auto i : v1)
+ cout << i << endl;
+
+练习3.17:从cin读入一组词并把它们存入一个vector对象，然后设法把所有词都该写为大写形式。输出改变后的结果，每个词占一行。
+答：
+#include<iostream>
+#include<vector>
+#include<string>
+using namespace std;
+int main()
+{
+ vector<string> svec;
+ string str;
+ while(cin >> str)
+  svec.push_back(str);
+ for(auto &st : svec)
+ {
+  for(auto &s : st)
+   s = toupper(s);
+  cout << st << endl;
+ }
+ return 0;
+}
+
+练习3.18:下面得程序合法吗？如果不合法，你准备如何修改？
+vector<int> ivec;
+ivec[0] = 42;
+答：不合法。试图用下标访问一个不存在的元素，但是在编译时不会给出任何提示，在运行时会出现错误“段错误 (核心已转储)“。修改为：
+vector<int> ivec;
+ivec.push_back(42);
+
+练习3.19:如果想定义一个含有10个元素的vector对象，所有元素的值都是42,请列举出三种不同的实现方法。哪种方法更好呢？为什么？
+答：
+(a)vector<int> ivec = {42,42,42,42,42,42,42,42,42,42};
+(b)vector<int> ivec(10,42);
+(c)vector<int> ivec;
+   for(int i = 1;i <= 10;++i)
+    ivec.push_back(42);
+对此题而言，第二种方法更好。
+
+练习3.20:读入一组整数并把它们存入一个vector对象，将每对相邻整数的和输出出来。改写你的程序，这次要求先输出第1个和最后1个元素的和，接着输出第2个和倒数第2个元素的和，以此类推。
+答：
+#include<iostream>
+#include<vector>
+#include<string>
+using namespace std;
+int main()
+{
+ vector<int> ivec;
+ int num;
+ while(cin >> num)
+  ivec.push_back(num);
+ if(ivec.size() % 2)
+  {
+   for(int i = 0;i < ivec.size()-2;i += 2)
+    cout << ivec[i] + ivec[i+1] << endl;
+   cout << ivec[ivec.size()-1] << endl;
+  }
+ else
+  {
+   for(int i = 0;i < ivec.size();i += 2)
+   cout << ivec[i] + ivec[i+1] << endl;
+  }
+ return 0;
+}
+
+#include<iostream>
+#include<vector>
+#include<string>
+using namespace std;
+int main()
+{
+ vector<int> ivec;
+ int num;
+ while(cin >> num)
+  ivec.push_back(num);
+ if(ivec.size() % 2)
+  {
+   for(int i = 0;i < ivec.size()/2;++i)
+    cout << ivec[i] + ivec[ivec.size()-1-i] << endl;
+   cout << ivec[ivec.size()/2] << endl;
+  }
+ else
+  {
+   for(int i = 0;i < ivec.size();i += 2)
+    cout << ivec[i] + ivec[ivec.size()-1-i] << endl;
+  }
+ return 0;
+}
 
