@@ -567,3 +567,151 @@ int main()
  return 0;
 }
 
+练习3.37:下面的程序是何含义，程序的输出结果是什么？
+const char ca[] = {'h','e','l','l','o'};
+const char *cp = ca;
+while(*cp)
+{
+ cout << *cp << endl;
+ ++cp;
+}
+答：程序循环输出ca[]中的内容"hello"之后输出了一串乱码。当程序输出最后一个字符的时候输出乱码，系统判定访问已越界，所以结束循环。我在while循环之前加上了一句代码ptrdiff_t n = end(ca) - begin(ca);之后程序只输出字符，没有输出乱码，应该是编译器的扩展(第102页)。
+
+练习3.38:在本节中我们提到，将两个指针相加不但是非法的，而且也没有什么意义。请问为什么两个指针相加没有什么意义？
+答：若两个指针相加，会将地址相加，而不是指针所指向的值。
+
+练习3.39:编写一段程序，比较两个string对象，再编写一段程序，比较两个C风格字符串的内容。
+答：
+#include<iostream>
+#include<string>
+#include<cstring>
+using namespace std;
+int main()
+{
+ string s1 = "A string example";
+ string s2 = "A different string";
+ if(s1 > s2)
+  cout << "s1 > s2" << endl;
+ const char ca1[] = "A string example";
+ const char ca2[] = "A different string";
+ if(strcmp(ca1,ca2) > 0)
+  cout << "ca1 > ca2" << endl;
+ return 0;
+}
+
+练习3.40:编写一段程序，定义两个字符数组并用字符串字面值初始化它们;接着再定义一个字符数组存放前两个数组连接后的结果。使用strcpy和strcat把前两个数组的内容拷贝到第三个数组中。
+答：
+#include<iostream>
+#include<cstring>
+using namespace std;
+int main()
+{
+ const char ca1[] = "C++ Primer";
+ const char ca2[] = "5th";
+ constexpr size_t sz = strlen(ca1) + strlen(ca2) + 1;
+ char largeStr[sz];
+ strcpy(largeStr,ca1);
+ strcat(largeStr," ");
+ strcat(largeStr,ca2);
+ const char *cp = largeStr;
+ while(*cp)
+ {
+  cout << *cp;
+  ++cp;
+ }
+ cout << endl;
+
+
+ return 0;
+}
+
+练习3.41:编写一段程序，用整型数组初始化一个vector对象。
+答：
+#include<iostream>
+#include<vector>
+#include<cstring>
+using namespace std;
+int main()
+{
+ constexpr size_t sz = 10;
+ int arr[sz];
+ for(int i = 0;i != sz;++i)
+ {
+  arr[i] = i;
+ }
+ //vector<int> ivec(begin(arr),end(arr));
+ vector<int> ivec(arr,arr + sz);
+ for(auto i : ivec)
+  cout << i << endl;
+ return 0;
+}
+
+练习3.42:编写一段程序，将含有整数元素的vector对象拷贝给一个整型数组。
+答：
+#include<iostream>
+#include<vector>
+#include<cstring>
+using namespace std;
+int main()
+{
+ constexpr size_t sz = 10;
+ int arr[sz];
+ vector<int> ivec;
+ for(int i = 0;i != sz;++i)
+  ivec.push_back(i);
+ for(auto i : ivec)
+  cout << i << " ";
+ cout << endl;
+ for(int i = 0;i != sz;++i)
+ {
+  arr[i] = ivec[i];
+ }
+ for(auto i : arr)
+  cout << i << " ";
+ cout << endl;
+ return 0;
+}
+
+练习3.43:编写3个不同版本的程序，令其均能输出ia的元素。版本1使用范围for语句管理迭代过程;版本2和版本3都使用普通的for语句，其中版本2要求用下标运算符，版本3要求用指针。此外，在所有3个版本的程序中都要直接写出数据类型，而不能使用类型别名、auto关键字或decltype关键字。
+答：
+#include<iostream>
+#include<vector>
+using namespace std;
+int main()
+{
+ int ia[3][4] =
+ {
+  {0,1,2,3},
+  {4,5,6,7},
+  {8,9,10,11}
+ };
+//版本1,使用范围for语句管理迭代过程
+ cout << "版本1,使用范围for语句管理迭代过程" << endl;
+ for(int (&p)[4] : ia)
+  for(int q : p)
+  cout << q << " ";
+ cout << endl;
+//版本2,使用普通for语句，下标运算符
+ cout << "版本2,使用普通for语句，下标运算符" << endl;
+ for(size_t i = 0;i != 3;++i)
+  for(size_t j = 0;j != 4;++j)
+   cout << ia[i][j] << " ";
+ cout << endl;
+//版本3,使用普通for语句，指针
+ cout << "版本3,使用普通for语句，指针" << endl;
+ for(int (*p)[4] = ia;p != ia + 3;++p)
+  for(int *q = *p;q != *p + 4;++ q)
+   cout << *q << " ";
+ cout << endl;
+
+ return 0;
+}
+
+练习3.44:改写上一个练习中的程序，使用类型别名来代替循环控制变量的类型。
+答：声明一下using int_array = int[4];然后把代码替换一下即可。
+
+练习3.45:再一次改写程序，这次使用auto关键字。
+答：
+把控制变量的类型替换为auto即可。
+
+
