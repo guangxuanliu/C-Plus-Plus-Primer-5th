@@ -1,0 +1,5 @@
+注：以下内容为书中可能的错误之处。
+Page 118:"prtdiff_t"应该为"ptrdiff_t"。
+Page 132:中间挨骂中的while循环中"*beg"应该为"*pbeg"。
+
+
