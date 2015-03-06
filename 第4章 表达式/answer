@@ -91,6 +91,129 @@ if(a > b && b > c && c > d)
 (c)vec[ival]的值和vec[ival+1]的值的大小，等价与vec[ival] <= vec[ival+1]
 感觉条件不足，无法判断表达式正确与否。
 
+练习4.20:假设iter的类型是vector<string>::iterator,说明下面的表达式是否合法。如果合法，表达式的含义是什么？如果不合法，错在何处？
+(a)*iter++;	(b)(*iter)++;	(c)*iter.empty();
+(d)iter->empty();(e)++*iter;	(f)iter++->empty();
+答：
+(a)合法，解引用iter所指向的string，并将iter移动到下一位置。
+(b)不合法，解引用iter以后的结果是string，然后将string执行后置递增操作。
+(c)不合法，解引用运算符的优先级低于点运算符，而iter没有名为empty的成员。
+(d)合法，运行iter所指对象的empty成员。
+(e)不合法，理由同(b)
+(f)合法，先执行iter的empty成员，然后将iter移动到下一位置。
 
+练习4.21:编写一段程序，使用条件运算符从vector<int>中找到哪些元素的值是奇数，然后将这些奇数值翻倍。
+答：
+#include<iostream>
+#include<vector>
+using namespace std;
+int main()
+{
+ vector<int> ivec;
+ for(int i = 0;i != 10;++i)
+  ivec.push_back(i);
+ for(auto i : ivec)
+  cout << i << " ";
+ cout << endl;
+ for(auto i : ivec)
+ {
+   i % 2?i *= 2:i;
+   cout << i << " ";
+ }
+  cout << endl;
+ return 0;
+}
+
+练习4.22:本节的示例程序将成绩划分成high pass、pass和fail三种，扩展该程序使进一步将60分到75分之间的成绩设定为low pass。要求程序包含两个版本:一个版本只使用条件运算符：另外一个版本使用1个或多个if语句。哪个版本的程序更容易理解呢？为什么？
+答：
+finalgrade = (grade > 90)?"high pass":(grade < 60)?"fail":(grade < 75)?"low pass":"pass"
+
+if(grade > 90)
+ finalgrade = "high pass";
+if(grade > 60 && grade < 75)
+ finalgrade = "low pass";
+if(grade < 60)
+ finalgrade = "fail";
+第二种版本更容易理解一些，因为随着条件运算符嵌套层数的增加，代码的可读性急剧下降。因此，条件运算的嵌套最好别超过两到三层。
+
+练习4.23:因为运算符的优先级问题，下面这条表达式无法通过编译。根据4.12节中的表(第147页)指出它的问题在哪里？应该如何修改？？
+string s = "word";
+string p1 = s + s[s.size() - 1] == 's'?"":"s";
+答：因为加法运算符的优先级高于相等运算符的优先级高于条件运算符的优先级，所以原表达式等于((s + (s[s.size() - 1])) == 's')?"":"s"，应修改为s + (((s[s.size() - 1]) == 's')?"":"s")
+
+练习4.24:本节的示例程序将成绩划分为high pass、pass和fail三种，它的依据是条件运算符满足右结合律。假如条件运算符满足的是左结合律，求值过程将是怎样的？
+答：按照从左向右的顺序结合，将会出现错误，因为条件运算符的两个表达式类型不同，一个是const char*,另一个是bool，试着加括号改变结合顺序：
+finalgrade = ((grade > 90)?"high pass":(grade < 60))?"fail":"pass";
+将会报错：
+error: operands to ?: have different types ‘const char*’ and ‘bool’
+   finalgrade = ((grade > 90)?"high pass":(grade < 60))?"fail":"pass"; 
+                                                     ^
+练习4.25:如果一台机器上int占32位、char占8位，用的是Latin-1字符集，其中字符'q'的二进制形式是01110001,那么表达式~'q' << 6的值是什么？
+答：0000 0000 0000 0000 0010 0011 1000 0000
+
+练习4.26:在本节关于测验成绩的例子中，如果使用unsigned int作为quiz1的类型会发生什么情况？
+答：int类型只能确保占有16位，因为班中至少有30名学生，所以移位时将会产生未定义的行为。
+
+练习4.27:下列表达式的结果是什么？
+unsigned long ul1 = 3,ul2 = 7;
+(a)ul1 & ul2	(b)ul1 | ul2
+(c)ul1 && ul2	(d)ul1 || ul2
+答：
+(a)3		(b)7
+(c)true		(d)true
+
+练习4.28:编写一段程序，输出每一种内置类型所占空间的大小。
+答：
+以int为例，其它类似。
+#include<iostream>
+using namespace std;
+int main()
+{
+ cout << "int:\t" << sizeof(int) << endl;
+ return 0;
+}
+
+练习4.29:推断下面代码的输出结果并说明理由。实际运行这段程序，结果和你想的一样吗？如果不一样，为什么？
+int x[10]; int *p = x;
+cout << sizeof(x)/sizeof(*x) << endl;
+cout << sizeof(p)/sizeof(*p) << endl;
+答：
+输出：
+10
+2
+对数组执行sizeof运算得到整个数组所占空间的大小，等价于对数组中所有元素各执行以此sizeof运算并将所得结果求和，sizeof(*x)既x[0]的大小，两者之商即为数组的大小;*p指向int，大小为4,p的类型为int*，我所在的环境为64位，所以占8位，两者之商为2。
+
+练习4.30:根据4.12节中的表(第147页)，在下述表达式的适当位置加上括号，使得加上括号之后表达式的含义与原来的含义相同。
+(a)sizeof x + y		(b)sizeof p->mem[i]
+(c)sizeof a < b		(d)sizeof f()
+答：
+(a)sizeof(x) + y	(b)sizeof(p->mem[i])
+(c)sizeof(a) < b	(d)sizeof(f())
+
+练习4.31:本节的程序使用了前置版本的递增运算符和递减运算符，解释为什么要用前置版本而不用后置版本。要想使用后置版本的递增递减运算符需要做哪些改动？使用后置版本重写本节的程序。
+答：
+前置版本将对象本身作为左值返回，后置版本则将对象原始值的副本作为右值返回。在此处本身并没有什么区别，所以并不需要什么改动。
+参考：
+(1)http://stackoverflow.com/questions/22591387/usage-of-the-built-in-comma-operator
+(2)http://www.zhihu.com/question/24484761
+(3)http://bbs.csdn.net/topics/390846064
+
+练习4.32:解释下面这个循环的含义。
+ constexpr int size = 5;
+ int ia[size] = {1,2,3,4,5};
+ for(int *ptr = ia,ix = 0;
+  ix != size && ptr != ia + size;
+  ++ix,++ptr) { /* ... */ }
+答：遍历数组中的各个元素。
+
+练习4.33:根据4.12节中的表(第147页)说明下面这条表达式的含义。
+ someValue ? ++x, ++y : --x, --y
+答：因为逗号运算符的优先级最低，所以该表达式等价于:
+(someValue ? ++x, ++y : --x), --y
+当someValue为真是执行++x,++y,--y,然后返回y的值，当somevalue为假时执行--x,--y,返回y的值。
+参考：
+(1)http://www.zhihu.com/question/27214955
+(2)https://github.com/pezy/Cpp-Primer/tree/master/ch04#exercise-433
+(3)https://github.com/pezy/Cpp-Primer/tree/master/ch04#exercise-433
 
 
