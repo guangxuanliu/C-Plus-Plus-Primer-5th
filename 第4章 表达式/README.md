@@ -216,4 +216,23 @@ cout << sizeof(p)/sizeof(*p) << endl;
 (2)https://github.com/pezy/Cpp-Primer/tree/master/ch04#exercise-433
 (3)https://github.com/pezy/Cpp-Primer/tree/master/ch04#exercise-433
 
+练习4.34:根据本节给出的变量定义，说明在下面的表达式中将发生什么样的类型转换：
+(a)if(fval)	(b)dval = fval + ival;	(c)dval + ival * cval;
+答：
+(a)fval转换成bool。
+(b)ival转换成float，相加的结果再转换为double。
+(c)cval提升为int，与ival的乘积转换为double，然后与dval相加。
+
+练习4.35:假设有如下定义，
+ char cval;	int ival;	unsigned int ui;
+ float fval;	double dval;
+请回答在下面的表达式中发生了隐式类型转换吗？如果有，指出来。
+ (a)cval = 'a' + 3;	(b)fval = ui -ival * 1.0;
+ (c)dval = ui * fval	(d)cval = ival + fval + dval;
+答：
+(a)'a'提升成int，然后与3相加，结果转换成char。
+(b)ival转换成double，然后与1.0相乘，ui转换成double，相减的结果转换成float赋值给fval。
+(c)ui转换成float，与fval相乘的结果转换成double，然后赋值给dval。
+(d)ival转换成float与fval相加，结果转换成double与dval相加，最后转换成char赋值给cval。
+
 
