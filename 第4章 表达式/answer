@@ -235,4 +235,19 @@ cout << sizeof(p)/sizeof(*p) << endl;
 (c)ui转换成float，与fval相乘的结果转换成double，然后赋值给dval。
 (d)ival转换成float与fval相加，结果转换成double与dval相加，最后转换成char赋值给cval。
 
+练习4.36:假设i是int类型，d是double类型，书写表达式i *= d使其执行整数类型的乘法而非浮点类型的乘法。
+答：i *= static_cast<int>(d)
+
+练习4.37:用命名的强制类型转换改写下列旧式的转换语句。
+int i; double d; const string *ps; char *pc; void *pv;
+(a)pv = (void*)ps;	(b)i = int(*pc);
+(c)pv = &d;		(d)pc = (char*)pv;
+答：
+(a)pv = const_cast<void*>ps;	(b)i = static_cast<int>(*pc);
+(c)pv = static_cast<void*>(&d)	(d)pc = static_cast<char*>(pv);
+
+练习4.38:说明下面这条表达式的含义。
+ double slope = static_cast<double>(j/i);
+答：j与i相除的结果用命名的强制类型转换为double。
+
 
