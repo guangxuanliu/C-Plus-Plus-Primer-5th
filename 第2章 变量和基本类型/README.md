@@ -14,7 +14,6 @@
 unsigned u = 10,u2 = 42;
 std::cout << u2 - u << std::endl;
 std::cout << u - u2 << std::endl;
-
 int i = 10,i2 = 42;
 std::cout << i2 - i << std::endl;
 std::cout << i - i2 << std::endl;
@@ -48,9 +47,9 @@ std::cout << u - i << std::endl;
 ```
 
 答：
-(a)字符，宽字符，字符串，宽字符串
-(b)整型，无符号整型，长整型，无符号长整型，八进制，十六进制
-(c)双精度浮点型，单精度浮点型，扩展精度浮点型
+(a)字符，宽字符，字符串，宽字符串<br />
+(b)整型，无符号整型，长整型，无符号长整型，八进制，十六进制<br />
+(c)双精度浮点型，单精度浮点型，扩展精度浮点型<br />
 (d)整型，无符号整型，双精度浮点型，双精度浮点型
 
 ###练习2.6:
@@ -72,10 +71,10 @@ int month = 09, day = 07;
 ```
 
 答：
-(a)\145是字母‘e’，\012是换行符。字符串类型
-(b)表示3.14。扩展精度类型。
+(a)\145是字母‘e’，\012是换行符。字符串类型<br />
+(b)表示3.14。扩展精度类型。<br />
 (c)什么都不代表，编译不通过。
-参考：[Stackoverflow](http://stackoverflow.com/questions/28316769/1024f-invalid-suffix-f-on-integer-constant)
+参考：[Stackoverflow](http://stackoverflow.com/questions/28316769/1024f-invalid-suffix-f-on-integer-constant)<br />
 (d)代表3.14，扩展精度类型。
 
 ###练习2.8:
@@ -97,8 +96,8 @@ int month = 09, day = 07;
 ```
 
 答：
-(a)非法，此处不能声明变量，应该先定义再使用。
-(b)合法，但是会有警告信息。(按作者的意思应该是不合法，作者在书中用了‘错误’两个字)
+(a)非法，此处不能声明变量，应该先定义再使用。<br />
+(b)合法，但是会有警告信息。(按作者的意思应该是不合法，作者在书中用了‘错误’两个字)<br />
 ```c++
 warning: narrowing conversion of ‘3.1400000000000001e+0’ from ‘double’ to ‘int’ inside { } [-Wnarrowing]
   int i = {3.14};
