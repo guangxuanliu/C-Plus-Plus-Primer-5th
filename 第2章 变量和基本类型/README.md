@@ -129,6 +129,7 @@ int main()
 (b)int iy;
 (c)extern int iz;
 ```
+
 答：<br />
 (a)定义，如果在函数体内部的话会报错。<br />
 (b)声明并定义。<br />
@@ -214,7 +215,7 @@ i = 5;ri = 10;
 std::cout << i << " " << ri << std::endl;
 ```
 
-答：'10' '10'。
+答：10 10。
 
 ###练习2.18:
 > 编写代码分别更改指针的值以及指针所指对象的值。
@@ -262,7 +263,7 @@ int i = 0;
 (c) int *p = &i;
 ```
 
-答：
+答：<br />
 (a)非法。把int型对象的地址赋给double型指针。<br />
 (b)非法。不能把int型变量直接赋给指针。<br />
 (c)合法。<br />
@@ -440,20 +441,19 @@ int main()
  auto e = &ci;
  const auto f = ci;
  auto &g = ci;
- 
  a = 42;
  b = 42;
  c = 42;
  d = 42;
  e = 42;
  g = 42;
- 
  return 0;
 }
 ```
 
 ###练习2.35:
 > 判断下列定义推断出的类型是什么，然后编写程序进行验证。
+
 ```c++
 const int i = 42;
 auto j = i; const auto &k = i; auto *p = &i;
