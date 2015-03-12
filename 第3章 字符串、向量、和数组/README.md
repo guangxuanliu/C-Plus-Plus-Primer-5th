@@ -191,36 +191,36 @@ for(auto &c : s) { /*……*/ }
 ###练习3.12:
 > 下列vector对象的定义有不正确的吗？如果有，请指出来。对于正确的，描述其执行结果;对于不正确的，说明其错误原因。
 ```c++
-(a)vector<vector<int>> ivec;
-(b)vector<string> svec = ivec;
-(c)vector<string> svec(10,"null");
+(a)vector<vector<int>> ivec;<br />
+(b)vector<string> svec = ivec;<br />
+(c)vector<string> svec(10,"null");<br />
 ```
 
 答：<br />
-(a)正确，定义一个类型为vector<vector<int>>的变量。
-(b)错误，两个vector对象的类型不相同。
-(c)正确，svec有10个值为"null"的元素。
+(a)正确，定义一个类型为vector<vector<int>>的变量。<br />
+(b)错误，两个vector对象的类型不相同。<br />
+(c)正确，svec有10个值为"null"的元素。<br />
 
 ###练习3.13:
 > 下列的vector对象各包含多少个元素？这些元素的值分别是什么？
 ```c++
-(a)vector<int> v1;
-(b)vector<int> v2(10);
-(c)vector<int> v3(10,42);
-(d)vector<int> v4{10};
-(e)vector<int> v5{10,42};
-(f)vector<string> v6{10};
-(g)vector<string> v7{10,"hi"};
+(a)vector<int> v1;<br />
+(b)vector<int> v2(10);<br />
+(c)vector<int> v3(10,42);<br />
+(d)vector<int> v4{10};<br />
+(e)vector<int> v5{10,42};<br />
+(f)vector<string> v6{10};<br />
+(g)vector<string> v7{10,"hi"};<br />
 ```
 
 答：<br />
-(a)0个元素。
-(b)10个元素，每个元素的值都为0。
-(c)10个元素，每个元素的值都为42。
-(d)1个元素，值为10.
-(e)2个元素，每个元素的值都为42.
-(f)10个元素，每个元素的值都为空。
-(g)10个元素，每个元素的值都为"hi"。
+(a)0个元素。<br />
+(b)10个元素，每个元素的值都为0。<br />
+(c)10个元素，每个元素的值都为42。<br />
+(d)1个元素，值为10.<br />
+(e)2个元素，每个元素的值都为42.<br />
+(f)10个元素，每个元素的值都为空。<br />
+(g)10个元素，每个元素的值都为"hi"。<br />
 
 ###练习3.14:
 > 编写一段程序，用cin读入一组整数并把它们存入一个vector对象。
@@ -262,7 +262,7 @@ int main()
 ###练习3.16:
 > 编写程序，把练习3.13中vector对象的容量和具体内容输出出来。检查你之前的回答是否正确，如果不对，回头重新学习3.3.1节(第87页)直到弄明白错在何处为止。
 
-答：<br />
+答：
 用v1举例，其他类似。
 ```c++
 cout << v1.size() << endl;
@@ -512,10 +512,10 @@ unsigned buf_size = 1024;
 ```
 
 答：<br />
-(a)非法，维度必须是一个常量表达式。但是我所在的编译环境中并没有报错。
-(b)合法。
-(c)非法，同(a)
-(d)非法，没有空间可存放空字符。
+(a)非法，维度必须是一个常量表达式。但是我所在的编译环境中并没有报错。<br />
+(b)合法。<br />
+(c)非法，同(a)<br />
+(d)非法，没有空间可存放空字符。<br />
 
 ###练习3.28:
 > 下列数组中元素的值是什么？
