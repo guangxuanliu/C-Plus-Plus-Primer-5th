@@ -369,7 +369,7 @@ cout << sizeof(p)/sizeof(*p) << endl;
  float fval;	double dval;
 ```
 
-	请回答在下面的表达式中发生了隐式类型转换吗？如果有，指出来。
+> 请回答在下面的表达式中发生了隐式类型转换吗？如果有，指出来。
 ```c++
  (a)cval = 'a' + 3;	(b)fval = ui -ival * 1.0;
  (c)dval = ui * fval	(d)cval = ival + fval + dval;
