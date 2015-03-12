@@ -87,6 +87,8 @@ while(cin >> num && num != 42)
 
 ###练习4.11:
 > 书写一条表达式用于测试4个值a、b、c、d的关系，确保a大于b、b大于c、c大于d。
+
+答:<br />
 ```c++
 if(a > b && b > c && c > d)
 ```
@@ -367,7 +369,7 @@ cout << sizeof(p)/sizeof(*p) << endl;
  float fval;	double dval;
 ```
 
-请回答在下面的表达式中发生了隐式类型转换吗？如果有，指出来。
+	请回答在下面的表达式中发生了隐式类型转换吗？如果有，指出来。
 ```c++
  (a)cval = 'a' + 3;	(b)fval = ui -ival * 1.0;
  (c)dval = ui * fval	(d)cval = ival + fval + dval;
