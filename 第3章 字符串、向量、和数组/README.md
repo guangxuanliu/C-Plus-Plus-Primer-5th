@@ -380,7 +380,7 @@ int main()
 ###练习3.21:
 > 请使用迭代器重做3.3.3节(第94页)的第一个练习。
 
-答：<br />
+答：
 以v1为例，其它类似：<br />
 ```c++
 for(auto it = v1.begin();it != v1.end();++it)
@@ -419,6 +419,8 @@ int main()
 
 ###练习3.23:
 > 编写一段程序，创建一个含有10个整数得vector对象，然后使用迭代器将所有元素的值都变成原来的两倍。输出vector对象的内容，检验程序是否正确。
+
+答:<br />
 ```c++
 #include<iostream>
 #include<vector>
@@ -556,6 +558,8 @@ for(size_t ix = 0;ix < array_size;++ix)
 
 ###练习3.31:
 > 编写一段程序，定义一个含有10个int的数组，令每个元素的值就是其下标值。
+
+答:<br />
 ```c++
 #include<iostream>
 using namespace std;
@@ -623,6 +627,7 @@ int main()
 
 ###练习3.35:
 > 编写一段程序，利用指针将数组中的元素置为0。
+
 答：<br />
 ```c++
 #include<iostream>
@@ -874,7 +879,7 @@ int main()
 ###练习3.45:
 > 再一次改写程序，这次使用auto关键字。
 
-答：<br />
+答：
 把控制变量的类型替换为auto即可。
 
 
