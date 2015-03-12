@@ -86,7 +86,7 @@ while(status = find(word)) { /*...*/ }
 ```
 
 答:<br />
-(a)语法错误,缺少分号,修改为:ival1 = ival2;
+(a)语法错误,缺少分号,修改为:ival1 = ival2;<br />
 (b)应用花括号控制执行路径,修改为:
 ```c++
    if(ival < minval)
