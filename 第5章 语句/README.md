@@ -310,3 +310,281 @@ int main()
 ```c++
   const unsigned evenCnt = 0,oddCnt = 0;
 ```
+
+###练习5.14:
+> 编写一段程序,从标准输入中读取若干string对象并查找连续重复出现的单词.所谓连续重复出现的意思是:一个单词后面紧跟着这个单词本身.要求记录连续重复出现的最大次数以及对应的单词.如果这样的单词存在,输出重复出现的最大次数;如果不存在,输出一条信息说明任何单词都没有连续出现过.例如,如果是
+```c++
+how how now now now cow cow
+```
+那么输出应该表明单词now连续出现了3此.
+
+答:<br />
+```c++
+#include<iostream>
+#include<vector>
+using namespace std;
+int main()
+{
+	vector<string> svec;
+	string str;
+	while(cin >> str)
+		svec.push_back(str);
+	vector<int> ivec;
+	int cnt = 1;
+	for(auto beg = svec.begin();beg != (svec.end() - 1);++beg)
+		if(*beg == *(beg + 1))
+			++cnt;
+		else
+		{
+			ivec.push_back(cnt);
+			cnt = 1;
+		}
+	ivec.push_back(cnt);
+	string s = svec[0];
+	int i = 0,x = 0;
+	for(vector<int>::size_type ix = 0;ix != (ivec.size() - 1);++ix)
+			if(ivec[ix] < ivec[ix + 1])
+				i = (ix + 1);
+	for(vector<int>::size_type ix = 0;ix != i;++ix)
+		x += ivec[ix];
+	cout << svec[x] << " " << ivec[i] << endl;
+	return 0;
+}
+```
+
+注:实现方法比较麻烦，改天再写个简单的。
+
+###练习5.15:
+> 说明下列循环的含义并改正其中的错误.
+```c++
+(a)for(int ix = 0;ix != sz;++ix){ /*...*/ }
+   if(ix != sz)
+	// ...
+(b)int ix;
+   for(ix != sz;++ix) { /*...*/ }
+(c)for(int ix = 0;ix != sz;++ix,++ sz) { /*...*/ }
+```
+
+答:<br />
+(a)ix不在作用域,应该把ix的定义放在for循环之外。<br />
+(b)for循环的格式不对,应修改为for(int ix = 0;ix != sz;++ix)。<br />
+(c)无休止的循环,应该把++sz删去。<br />
+
+###练习5.16:
+> while循环特别适用于那种条件保持不变,反复执行操作的情况,例如,当未达到文件末尾时不断读取下一个值.for循环则更像是在按步骤迭代,它的索引值在某个范围内依次变化.根据每种循环的习惯用法各自编写一段程序,然后分别用另一种循环改写.如果只能使用一种循环,你倾向于使用哪种呢?为什么?
+
+答:<br />
+```c++
+vector<int> ivec;
+int i;
+while(cin >> i)
+	ivec.push_back(i);
+
+vector<int> ivec;
+for(int i;cin >> i;)
+	ivec.push_back(i);
+```
+更倾向于for吧,简单。
+
+###练习5.17:
+> 假设有两个包含整数的vector对象,编写一段程序,检验其中一个vector对象是否是另一个的前缀.为了实现这一目标,对于两个不等长的vector对象,只需挑出长度较短的那个,把它所有元素和另一个vector对象比较即可.例如,如果两个vector对象的元素分别是0,1,1,2和0,1,1,2,3,5,8,则程序的返回的结果应该为真.
+
+答:<br />
+```c++
+#include<iostream>
+#include<vector>
+using namespace std;
+int main()
+{
+	vector<int> ivec1{ 0,1,1,2 },ivec2{ 0,1,1,2,3,5,8 };
+	decltype(ivec1.size()) size = (ivec1.size()<ivec2.size()?ivec1.size():ivec2.size());
+	bool status = true;
+	for(decltype(ivec1.size()) ix = 0;ix != size;++ix)
+	{
+		if(ivec1[ix] != ivec2[ix])
+		{
+			status = false;
+			break;
+		}	
+	}	
+	if(status)
+		cout << "Yes" << endl;
+	else
+		cout << "No" << endl;
+	return 0;
+}
+```
+
+###练习5.18:
+> 说明下列循环的含义并改正其中的错误。
+```c++
+(a)do
+	int v1,v2;
+	cout << "Please enter two numbers to sum:";
+	if(cin >> v1 >> v2)
+		cout << "Sun is: " << v1 + v2 << endl;
+   while(cin);
+(b)do{
+	   // ...
+   } while(int ival = get_response);
+(c)do{
+	int ival = get_response();
+} while(ival);
+```
+
+答：<br />
+(a)缺少大括号。在do后面加上大括号。<br />
+(b)不允许在条件部分定义变量。把变量的定义提到do while语句之前。<br />
+(c)ival超出其作用域，把ival的定义提到do while语句之前。<br />
+
+###练习5.19:
+> 编写一段程序，使用do while循环重复地执行下述任务：首先提示用户输入两个string对象，然后挑出较短的那个并输出它。
+
+答：<br />
+```c++
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+	string rsp;
+	do
+	{
+		int val1,val2;
+		cout << "Please enter two num:" << endl;
+		cin >> val1 >> val2;
+		cout << "The sum is: " << val1 + val2 << endl;
+		cout << "More?(y or n):";
+		cin >> rsp;
+	}
+	while(cin && rsp[0] != 'n');
+	return 0;
+}
+```
+
+###练习5.20:
+> 编写一段程序，从标准输入中读取string对象的序列直到连续出现两个相同的单词或者所有单词都读完为止。使用while循环一次读取一个单词，当一个单词连续出现两次时用break语句终止循环。输出连续重复出现的单词，或者输出一个消息说明没有任何单词是连续重复出现的。
+
+答：<br />
+```c++
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+	string str1,str2;
+	bool fd = false;
+	cout << "Please enter a serial of strings:" << endl;
+	if(cin >> str1)
+		while(cin >> str2)
+		{
+			if(str1 == str2)
+			{
+				cout << str2 << " have been found!" << endl;
+				fd = true;
+				break;
+			}
+			else
+				str1 = str2;
+		}	
+	if(!fd)
+		cout << "Not found!" << endl;
+	return 0;
+}
+```
+
+###练习5.21:
+> 修改5.5.1节(第171页)练习题的程序，使其找到的重复单词必须以大写字母开头。
+
+答：在上一题的第二个if判断中加上一个条件就可以了。
+```c++
+if(str1 == str2 && isupper(str2[0]))
+```
+
+练习5.22:本节的最后一个例子跳回到begin，其实使用循环能更好地完成该任务。重写这段代码，注意不再使用goto语句。
+答：
+int sz = get_size();
+while(sz <= 0)
+{
+	sz = get_size();
+}
+
+###练习5.23:
+> 编写一段程序，从标准输入读取两个整数，输出第一个整数除以第二个整数的结果。
+
+答：<br />
+```c++
+#include<iostream>
+using namespace std;
+int main()
+{
+	cout << "Please enter two num:" << endl;
+	int num1,num2;
+	cin >> num1 >> num2;
+	cout << "num1/num2:\t" << num1/num2 << endl;
+	return 0;
+}
+```
+
+###练习5.24:
+> 修改你的程序，使得当第二个数是0时抛出异常。先不要设定catch子句，运行程序并真的为除数输入0,看看会发生什么？
+
+答：<br />
+```c++
+#include<iostream>
+#include<stdexcept>
+using namespace std;
+int main()
+{
+	cout << "Please enter two num:" << endl;
+	int num1,num2;
+	while(cin >> num1 >> num2)
+	try{
+		if(num2 == 0)
+		throw runtime_error("num2 is zero!");	
+		cout << "num1/num2:\t" << num1/num2 << endl;
+	}
+	catch(runtime_error err)
+	{
+		
+	}
+	return 0;
+}
+```
+
+当没有catch子句时编译不通过，提示:
+```c++
+main.cpp:18:9: error: expected ‘catch’ before numeric constant
+```
+当有catch子句时，其中若不包含任何代码，输入除数为0时，程序正常退出。
+
+###练习5.25:
+> 修改上一题的程序，使用try语句块去捕获异常。catch子句应该为用户输出一条提示信息，询问其是否输入新数并重新执行try语句块的内容。
+
+答：<br />
+```c++
+#include<iostream>
+#include<stdexcept>
+using namespace std;
+int main()
+{
+	cout << "Please enter two num:" << endl;
+	int num1,num2;
+	while(cin >> num1 >> num2)
+	try{
+		if(num2 == 0)
+		throw runtime_error("num2 is zero!");	
+		cout << "num1/num2:\t" << num1/num2 << endl;
+	}
+	catch(runtime_error err)
+	{
+		cout << err.what()
+			 << "\nTry again? Enter y or n" << endl;
+		char c;
+		cin >> c;
+		if(!cin || c == 'n')
+	    break;		
+	}
+	return 0;
+}
+```
