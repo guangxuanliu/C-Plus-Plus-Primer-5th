@@ -522,7 +522,7 @@ while(sz <= 0)
 using namespace std;
 int main()
 {
-	cout << "Please enter two num:" << endl;
+	cout << "Please enter two nums:" << endl;
 	int num1,num2;
 	cin >> num1 >> num2;
 	cout << "num1/num2:\t" << num1/num2 << endl;
@@ -540,7 +540,7 @@ int main()
 using namespace std;
 int main()
 {
-	cout << "Please enter two num:" << endl;
+	cout << "Please enter two nums:" << endl;
 	int num1,num2;
 	while(cin >> num1 >> num2)
 	try{
@@ -561,6 +561,12 @@ int main()
 main.cpp:18:9: error: expected ‘catch’ before numeric constant
 ```
 当有catch子句时，其中若不包含任何代码，输入除数为0时，程序正常退出。
+注:若此处没有try、catch，仅有一条throw语句时程序可编译通过，当输入的第二个数是0时抛出异常。
+```c++
+terminate called after throwing an instance of 'std::runtime_error'
+  what():  num2 is zero!
+		   已放弃 (核心已转储)
+```
 
 ###练习5.25:
 > 修改上一题的程序，使用try语句块去捕获异常。catch子句应该为用户输出一条提示信息，询问其是否输入新数并重新执行try语句块的内容。
